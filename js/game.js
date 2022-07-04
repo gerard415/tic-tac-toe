@@ -7,4 +7,13 @@ export default class Game{
     nextTurn(){
         this.turn = this.turn === 'X' ? 'O' : 'X'
     }
+
+    makeMove(i){
+        if(this.board[i]){          //if there exists a value at an index, then it cannot be played at again
+            return
+        }
+
+        this.board[i] = this.turn;
+        this.nextTurn()
+    }
 }

@@ -9,13 +9,19 @@ export default class Game{
     }
 
     makeMove(i){
+        if(!this.isinprogress()){   //if the game is not in progress end the execution
+            return;
+        }
 
         if(this.board[i]){          //if there exists a value at an index, then it cannot be played at again
             return
         }
 
         this.board[i] = this.turn;
-        this.nextTurn()
+
+        if(!this.findwinningcombination()){   //if there is no winner, switch the turns
+            this.nextTurn()  
+        }
     }
 
     findwinningcombination(){
@@ -40,5 +46,7 @@ export default class Game{
         return null
     }
 
-    
+    isinprogress(){
+        return !this.findwinningcombination() && this.board.includes(null) //the game is in progress if there are no winning combinations and if the board has a null(empty) value
+    }
 }

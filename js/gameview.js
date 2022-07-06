@@ -24,6 +24,20 @@ export default class Gameview{
                 <div class="board__tile" data-index="7">O</div>
                 <div class="board__tile" data-index="8">O</div>
             </div>
-        `
+        `;
+
+        this.onTileclick = '';
+        this.onRestartclick = '';
+
+        this.root.querySelectorAll('.board__tile').forEach(tile =>{
+            tile.addEventListener('click', ()=>{
+                this.onTileclick(tile.dataset.index)
+            })
+            
+        })
+
+        this.root.querySelector('.header__restart').addEventListener('click', ()=>{
+            this.onRestartclick()
+        })
     }
 }

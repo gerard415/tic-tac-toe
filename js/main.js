@@ -5,8 +5,13 @@ let game = new Game()  //creating a new instance of the game
 let gameview = new GameView(document.getElementById('app'))
 
 
+gameview.onTileclick = function(i){
+    console.log(`Tile Clicked = ${i}`)
+}
 
-
+gameview.onRestartclick = function(){
+    console.log('game restart')
+}
 
 
 

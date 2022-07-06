@@ -1,6 +1,31 @@
 import Game from './game.js'
+import GameView from './gameview.js'
 
 let game = new Game()  //creating a new instance of the game
+let gameview = new GameView(document.getElementById('app'))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 // game.makeMove(1)

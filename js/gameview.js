@@ -4,25 +4,25 @@ export default class Gameview{
         this.root.innerHTML = `
             <div class='header'>
                 <div class='header__turn'>
-                    X's Turn
+                    
                 </div>
                 <div class='header__status'>
-                    In progress
+                    
                 </div>
                 <button type='button' class='header__restart'>
                     <i class='material-icons'>refresh</i>
                 </button>
             </div>
             <div class="board">
-                <div class="board__tile" data-index="0">O</div>
-                <div class="board__tile" data-index="1">O</div>
-                <div class="board__tile board__tile--winner" data-index="2">O</div>
-                <div class="board__tile" data-index="3">O</div>
-                <div class="board__tile" data-index="4">O</div>
-                <div class="board__tile" data-index="5">O</div>
-                <div class="board__tile" data-index="6">O</div>
-                <div class="board__tile" data-index="7">O</div>
-                <div class="board__tile" data-index="8">O</div>
+                <div class="board__tile" data-index="0"></div>
+                <div class="board__tile" data-index="1"></div>
+                <div class="board__tile" data-index="2"></div>
+                <div class="board__tile" data-index="3"></div>
+                <div class="board__tile" data-index="4"></div>
+                <div class="board__tile" data-index="5"></div>
+                <div class="board__tile" data-index="6"></div>
+                <div class="board__tile" data-index="7"></div>
+                <div class="board__tile" data-index="8"></div>
             </div>
         `;
 
@@ -39,5 +39,43 @@ export default class Gameview{
         this.root.querySelector('.header__restart').addEventListener('click', ()=>{
             this.onRestartclick()
         })
+    }
+
+    //update board
+    update(game) {
+        this.updateStatus(game)
+        this.updateTurn(game)
+        this.updateBoard(game)
+    }
+
+    updateStatus(game){
+        let status = 'In progress'
+
+        if(game.findwinningcombination()){
+            status = `${game.turn} is the winner`
+        }else if (!game.isinprogress()){
+            status = "It's a tie"
+        }
+
+        this.root.querySelector('.header__status').textContent = status
+    }
+
+    updateTurn(game){
+        this.root.querySelector('.header__turn').textContent = `${game.turn}'s turn`
+    }
+
+    updateBoard(game){
+        const winningCombination = game.findwinningcombination();
+
+        for (let i = 0; i < game.board.length; i++) {
+            const tile = this.root.querySelector(`.board__tile[data-index="${i}"]`);
+
+            tile.classList.remove("board__tile--winner");
+            tile.textContent = game.board[i];
+
+            if (winningCombination && winningCombination.includes(i)) {
+                tile.classList.add("board__tile--winner");
+            }
+        }
     }
 }

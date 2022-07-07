@@ -6,11 +6,14 @@ let gameview = new GameView(document.getElementById('app'))
 
 
 gameview.onTileclick = function(i){
-    console.log(`Tile Clicked = ${i}`)
+    game.makeMove(i)
+    gameview.update(game)
 }
 
 gameview.onRestartclick = function(){
-    console.log('game restart')
+    game = new Game()
+    gameview.update(game)
+    
 }
 
 
